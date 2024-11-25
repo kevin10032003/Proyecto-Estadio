@@ -1,0 +1,46 @@
+body {
+    margin: 0; /* Elimina los márgenes predeterminados */
+    padding: 0; /* Elimina el relleno predeterminado */
+    background-image: url('/static/img/estadio1.jpg'); /* Cambia 'ruta-de-tu-imagen.jpg' por el nombre de tu imagen */
+    background-size: cover; /* Ajusta el tamaño para cubrir toda la pantalla */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen */
+    height: 100vh; /* Asegúrate de que ocupe el 100% de la altura de la ventana */
+}
+
+.footer-bar {
+    position: fixed; /* Fija la barra al fondo de la página */
+    bottom: 0; /* Alinea al fondo */
+    left: 0; /* Alinea al inicio horizontalmente */
+    width: 100%; /* Ocupa todo el ancho de la página */
+    text-align: center; /* Centra el texto */
+    background-color: #333; /* Fondo oscuro (ajusta según tu diseño) */
+    color: #fff; /* Color de texto blanco */
+    padding: 10px 0; /* Espaciado arriba y abajo */
+    z-index: 1000; /* Asegura que siempre esté sobre otros elementos */
+}
+
+h1.mt-5 {
+    color: #00abb8; /* Cambia a un color que prefieras (rojo anaranjado en este caso) */
+    font-weight: bold; /* Opcional: aumenta el grosor de las letras */
+}
+
+p.lead.mt-3 {
+    color: #000000; /* Cambia a un color que prefieras (azul en este caso) */
+    font-size: 18px; /* Ajusta el tamaño del texto */
+}
+
+h1.mt-5, p.lead.mt-3 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra negra semitransparente */
+    color: #fff; /* Color blanco para el texto */
+}
+
+.text-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad del 50% */
+    padding: 20px; /* Espaciado interno alrededor del texto */
+    border-radius: 10px; /* Bordes redondeados */
+    display: inline-block; /* Adapta el fondo al tamaño del texto */
+    color: #fff; /* Color blanco para el texto */
+}
+
+
