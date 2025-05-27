@@ -1,7 +1,7 @@
 body {
     margin: 0; /* Elimina los márgenes predeterminados */
     padding: 0; /* Elimina el relleno predeterminado */
-    background-image: url('/static/img/estadio1.jpg'); /* Cambia 'ruta-de-tu-imagen.jpg' por el nombre de tu imagen */
+    background-image: url('/static/img/fondo.jpg'); /* Cambia 'ruta-de-tu-imagen.jpg' por el nombre de tu imagen */
     background-size: cover; /* Ajusta el tamaño para cubrir toda la pantalla */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     background-position: center; /* Centra la imagen */
@@ -23,6 +23,7 @@ body {
 h1.mt-5 {
     color: #00abb8; /* Cambia a un color que prefieras (rojo anaranjado en este caso) */
     font-weight: bold; /* Opcional: aumenta el grosor de las letras */
+    text-align: center;
 }
 
 p.lead.mt-3 {
@@ -41,6 +42,8 @@ h1.mt-5, p.lead.mt-3 {
     border-radius: 10px; /* Bordes redondeados */
     display: inline-block; /* Adapta el fondo al tamaño del texto */
     color: #fff; /* Color blanco para el texto */
+    text-align: center;
+    text-shadow: 0 0 5px 10px;
 }
 
 

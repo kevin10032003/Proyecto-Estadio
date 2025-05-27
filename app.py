@@ -10,8 +10,8 @@ app = Flask(__name__)
 # Configuración de la base de datos
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''  # Cambia si tienes contraseña configurada
-app.config['MYSQL_DB'] = 'flaskcontacts'
+app.config['MYSQL_PASSWORD'] = ''  
+app.config['MYSQL_DB'] = 'flaskcontactss'
 app.secret_key = '1234'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -352,4 +352,3 @@ def eliminar_reserva(id):
 
 if __name__ == '__main__':
     app.run(debug=True, host='localhost', port=3000)
-

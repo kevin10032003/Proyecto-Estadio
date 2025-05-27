@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Registro de Reserva</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Editar Registro de Reserva</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="id_cliente" class="form-label">ID Cliente</label>
+                <input type="text" class="form-control" id="id_cliente" name="id_cliente" value="{{ reserva.id_cliente }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_localidad" class="form-label">ID Localidad</label>
+                <input type="text" class="form-control" id="id_localidad" name="id_localidad" value="{{ reserva.id_localidad }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="fecha_reserva" class="form-label">Fecha Reserva</label>
+                <input type="date" class="form-control" id="fecha_reserva" name="fecha_reserva" value="{{ reserva.fecha_reserva }}" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+        <a href="{{ url_for('reservas') }}" class="btn btn-secondary mt-3">Volver a la lista de reservas</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
