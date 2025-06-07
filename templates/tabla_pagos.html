@@ -29,6 +29,9 @@
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este pago?');">
                             Eliminar
                         </button>
+                        <a href="{{ url_for('imprimir_boleto', id=pago.id) }}" class="btn btn-success btn-sm" target="_blank">
+    Imprimir Boleto
+</a>
                     </form>
                 </td>
             </tr>
@@ -81,4 +84,6 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}

@@ -3,9 +3,15 @@ from datetime import datetime
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
 import os
+from flask import make_response
+from xhtml2pdf import pisa
+from io import BytesIO
+from flask import render_template
+import qrcode
 
 load_dotenv()
 app = Flask(__name__)
+
 
 # Configuración de la base de datos
 app.config['MYSQL_HOST'] = 'localhost'
@@ -17,6 +23,61 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 mysql = MySQL(app)
 
+@app.route('/boleto')
+def mostrar_boleto():
+    pago = {
+        'id': 123456,
+        'cliente': 'Juan Pérez',
+        'email': 'juan@example.com',
+        'id_reserva': 7890,
+        'monto': 250.00,
+        'fecha_pago': '2025-05-30',
+        'estado_pago': 'Pagado'
+    }
+
+    # Datos para el QR
+    qr_data = f"ID Pago: {pago['id']}\nCliente: {pago['cliente']}\nMonto: ${pago['monto']}"
+    qr_img = qrcode.make(qr_data)
+
+    # Guardar imagen QR en carpeta static
+    qr_path = os.path.join('static', 'qr.png')
+    qr_img.save(qr_path)
+
+    return render_template('boleto.html', pago=pago)
+
+@app.route('/imprimir_boleto/<int:id>')
+def imprimir_boleto(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT pagos.id, pagos.id_reserva, pagos.monto, pagos.fecha_pago, pagos.estado_pago, clientes.fullname, clientes.email FROM pagos JOIN reservas ON pagos.id_reserva = reservas.id JOIN clientes ON reservas.id_cliente = clientes.id WHERE pagos.id = %s", (id,))
+    pago = cur.fetchone()
+    cur.close()
+
+    if not pago:
+        flash('Pago no encontrado')
+        return redirect(url_for('pagos'))
+
+    # Crea un diccionario con los datos del pago
+    boleto_data = {
+        'id': pago[0],
+        'id_reserva': pago[1],
+        'monto': pago[2],
+        'fecha_pago': pago[3],
+        'estado_pago': pago[4],
+        'cliente': pago[5],
+        'email': pago[6]
+    }
+
+    # Renderiza HTML
+    html = render_template('boleto_pago.html', pago=boleto_data)
+
+    # Genera PDF desde HTML
+    pdf = BytesIO()
+    pisa.CreatePDF(BytesIO(html.encode('utf-8')), dest=pdf)
+
+    response = make_response(pdf.getvalue())
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline; filename=boleto_pago.pdf'
+    return response 
 # Ruta principal
 @app.route('/')
 def index():
@@ -282,6 +343,7 @@ def eliminar_pago(id):
     mysql.connection.commit()  # Confirmar la eliminación
     flash('Pago eliminado correctamente')
     return redirect(url_for('pagos'))
+
 
 # ----------------------- RESERVAS -----------------------
 @app.route('/reservas')

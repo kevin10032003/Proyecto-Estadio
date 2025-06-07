@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Boleto de Pago</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .ticket-container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #002F6C;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            height: 40px;
+            vertical-align: middle;
+        }
+        .header h1 {
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 24px;
+        }
+        .details {
+            padding: 20px;
+            font-size: 16px;
+        }
+        .details p {
+            margin: 8px 0;
+        }
+        .qr-code, .barcode {
+            text-align: right;
+            padding: 0 20px 20px;
+        }
+        .qr-code img, .barcode img {
+            height: 80px;
+        }
+        .footer {
+            font-size: 13px;
+            background: #f0f0f0;
+            padding: 15px;
+            color: #555;
+        }
+        .footer h4 {
+            color: red;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket-container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <h1>BOLETO DE PAGO</h1>
+        </div>
+        <div class="details">
+            <p><strong>Transacción:</strong> {{ pago.id }}</p>
+            <p><strong>Nombre:</strong> {{ pago.cliente }}</p>
+            <p><strong>Email:</strong> {{ pago.email }}</p>
+            <p><strong>ID Reserva:</strong> {{ pago.id_reserva }}</p>
+            <p><strong>Monto:</strong> ${{ "{:,.2f}".format(pago.monto) }}</p>
+            <p><strong>Fecha de Pago:</strong> {{ pago.fecha_pago.strftime('%d/%m/%Y') }}</p>
+            <p><strong>Estado del Pago:</strong> {{ pago.estado_pago }}</p>
+        </div>
+        <div class="qr-code">
+            <img src="{{ url_for('static', filename='qr.png') }}" alt="Código QR">
+        </div>
+        <div class="footer">
+            <h4>IMPORTANTE:</h4>
+            <ul>
+                <li>Llega puntual al lugar acordado con tu boleto impreso o digital.</li>
+                <li>Este boleto es personal e intransferible.</li>
+                <li>Presenta tu identificación al momento del ingreso.</li>
+                <li>No se permite el ingreso sin este boleto.</li>
+            </ul>
+            <p>Este e-ticket es válido solo para el evento y fecha indicados. Cualquier alteración invalida el documento.</p>
+        </div>
+         <div class="qr">
+            <img src="{{ url_for('static', filename='qr.png') }}" alt="Código QR">
+        </div>
+    </div>
+</body>
+</html>
